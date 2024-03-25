@@ -10,8 +10,11 @@
 
 <style scoped>
 #container {
-  width: 100%;
-  background-color: var(--purple-900);
+  background-image: linear-gradient(
+    82deg,
+    var(--purple-500),
+    var(--purple-900)
+  );
 }
 
 #content {

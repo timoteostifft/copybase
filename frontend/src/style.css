@@ -1,6 +1,10 @@
 :root {
+  --purple-500: #5f13b6;
   --purple-900: #41167f;
-  --green: #088e5e;
+
+  --green-500: #11b178;
+  --green-900: #088e5e;
+
   --background: #fcfcfc;
   --text: #3d383b;
 }
