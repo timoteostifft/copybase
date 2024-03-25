@@ -9,4 +9,3 @@ import Template from "./components/Template.vue";
 </template>
 
 <style scoped></style>
-./components/Template.vue
