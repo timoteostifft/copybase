@@ -12,43 +12,58 @@ const api = import.meta.env.VITE_API;
         gráficos interativos.
       </p>
       <a :href="api + '/template'">BAIXAR MODELO</a>
+      <a :href="api + '/stub'">TESTAR</a>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #container {
-  width: 100%;
-}
+  background-color: var(--background);
 
-#content {
-  max-width: 1280px;
-  padding: 0 20px;
-  margin: 40px auto 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
+  #content {
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 
-#content > h1 {
-  text-align: center;
-  color: var(--purple-900);
-  font-weight: 700;
-  line-height: 2.25rem;
-}
+    h1 {
+      text-align: center;
+      color: var(--purple-900);
+      font-weight: 700;
+      line-height: 2.25rem;
+    }
 
-#content > p {
-  margin-top: 20px;
-  color: var(--text);
-}
+    p {
+      margin-top: 20px;
+      color: var(--text);
+    }
 
-#content > a {
-  margin-top: 20px;
-  background-color: var(--green);
-  color: var(--background);
-  font-weight: 900;
-  padding: 10px 20px;
-  font-size: 1.25rem;
-  text-decoration: none;
+    a {
+      font-weight: 900;
+      padding: 10px 20px;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    a:nth-of-type(1) {
+      margin-top: 20px;
+      background-image: linear-gradient(
+        82deg,
+        var(--green-500),
+        var(--green-900)
+      );
+      color: var(--background);
+    }
+
+    a:nth-of-type(2) {
+      margin-top: 10px;
+      background-color: var(--background);
+      color: var(--green-900);
+      border: 2px solid var(--green-900);
+    }
+  }
 }
 </style>

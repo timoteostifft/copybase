@@ -8,22 +8,22 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #container {
   background-image: linear-gradient(
     82deg,
     var(--purple-500),
     var(--purple-900)
   );
-}
 
-#content {
-  max-width: 1280px;
-  padding: 10px 20px;
-  margin: 0 auto;
-}
+  #content {
+    max-width: 1280px;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
 
-#content > a > img {
-  width: 130px;
+  a > img {
+    width: 130px;
+  }
 }
 </style>
