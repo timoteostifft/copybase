@@ -11,14 +11,14 @@
   box-sizing: border-box;
 }
 
-button {
+a {
   border-radius: 6px;
   border: 0;
   cursor: pointer;
   transition: filter 0.6s;
 }
 
-button:hover {
+a:hover {
   filter: brightness(1.2);
 }
 
