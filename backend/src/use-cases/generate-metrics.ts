@@ -5,8 +5,8 @@ interface GenerateMetricsUseCaseRequest {
     charges: number;
     interval: number;
     initiated_at: Date;
-    status: 'ACTIVE' | 'CANCELED';
     status_at: Date;
+    status: string;
     canceled_at: Date | null;
     price: number;
     next_cycle: Date;
@@ -15,7 +15,7 @@ interface GenerateMetricsUseCaseRequest {
 }
 
 export class GenerateMetricsUseCase {
-  execute({ data }: GenerateMetricsUseCaseRequest) {
+  async execute({ data }: GenerateMetricsUseCaseRequest) {
     const metrics = Metrics.create({
       data,
     });

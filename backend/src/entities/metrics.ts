@@ -7,9 +7,9 @@ interface MetricsProps extends Optional<EntityProps, 'created_at'> {
     charges: number;
     interval: number;
     initiated_at: Date;
+    status: string;
     status_at: Date;
     canceled_at: Date | null;
-    status: 'ACTIVE' | 'CANCELED';
     price: number;
     next_cycle: Date;
     subscriber_id: string;
@@ -102,20 +102,20 @@ export class Metrics extends Entity<MetricsProps> {
 
     for (let i = 0; i < periods.length; i++) {
       let j = i - 1;
-      let total = 0;
+      let active = 0;
 
       while (j >= 0) {
-        total += periods[j].gain - periods[j].loss;
+        active += periods[j].gain - periods[j].loss;
         j--;
       }
 
-      if (!total) {
+      if (!active) {
         continue;
       }
 
       churns.push({
         month: periods[i].start,
-        percentage: (periods[i].loss / total) * 100,
+        percentage: (periods[i].loss / active) * 100,
       });
     }
 

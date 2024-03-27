@@ -52,7 +52,7 @@ describe('generate metrics', () => {
 
     data.push(...array);
 
-    const result = sut.execute({
+    const result = await sut.execute({
       data,
     });
 
