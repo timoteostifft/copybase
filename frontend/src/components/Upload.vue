@@ -1,9 +1,35 @@
 <script setup>
 import { ref } from "vue";
+import axios from "../services/axios";
+import { useToast } from "vue-toastification";
 
 const dropping = ref(false);
-
 const file = ref("");
+const toast = useToast();
+
+const emit = defineEmits(["upload"]);
+
+function send() {
+  const data = new FormData();
+  data.append("file", file.value);
+
+  axios
+    .post("/metrics", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      emit("upload", response.data);
+    })
+    .catch((err) => {
+      if (err.response.status === 422) {
+        toast.error("Formato inválido de arquivo.");
+        return;
+      }
+      toast.error("Erro inesperado. Tente novamente mais tarde.");
+    });
+}
 
 function toggleDropping() {
   dropping.value = !dropping.value;
@@ -11,24 +37,14 @@ function toggleDropping() {
 
 function drop(e) {
   toggleDropping();
-
-  if (e.dataTransfer.files.lentgh > 1) {
-    console.log("Error");
-    return;
-  }
-
   file.value = e.dataTransfer.files[0];
+  send();
 }
 
 function select() {
   const selected = document.getElementById("file").files;
-
-  if (selected.lentgh > 1) {
-    console.log("Error");
-    return;
-  }
-
   file.value = selected[0];
+  send();
 }
 </script>
 
