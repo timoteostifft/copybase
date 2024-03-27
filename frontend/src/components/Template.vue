@@ -19,12 +19,11 @@ const api = import.meta.env.VITE_API;
 
 <style scoped lang="scss">
 #container {
-  background-color: var(--background);
-
+  margin-top: 40px;
   #content {
     max-width: 1280px;
     padding: 0 20px;
-    margin: 40px auto 0 auto;
+    margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
