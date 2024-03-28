@@ -1,0 +1,24 @@
+version: "3"
+services:
+  server:
+    container_name: copybase-server
+    volumes:
+      - ./backend/src:/app/backend/src
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+
+  app:
+    container_name: copybase-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src/app/frontend/src
+      - ./frontend/public:/app/frontend/public
+    depends_on:
+      - server
+    network_mode: "host"
