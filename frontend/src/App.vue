@@ -2,8 +2,8 @@
 import Header from "./components/Header.vue";
 import Template from "./components/Template.vue";
 import Upload from "./components/Upload.vue";
-import Metrics from "./components/Metrics.vue";
-import { Metric as TypeOfMetrics } from "./types/metric.ts";
+import Charts from "./components/Charts.vue";
+import { Metrics as TypeOfMetrics } from "./types/metric.ts";
 import { ref } from "vue";
 
 const metricsData = ref<TypeOfMetrics | null>(null);
@@ -17,7 +17,7 @@ function generateGraphics(data: TypeOfMetrics) {
   <Header />
   <Template />
   <Upload @upload="generateGraphics" />
-  <Metrics :data="metricsData" />
+  <Charts :data="metricsData" />
 </template>
 
 <style scoped></style>
