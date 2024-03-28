@@ -12,15 +12,18 @@
 1. Clone repository:
 
 ```bash
-  git clone https://github.com/timoteostifft/copybase.git
+  git clone https://github.com/timoteostifft/copybase.git && cd copybase
 ```
 
 2. Create your own .env copying env.example.
+```bash
+  cp ./frontend/.enx.example frontend/.env
+```
 
 3. Run using docker-compose:
 
 ```bash
-  cd copybase && docker-compose up
+  docker-compose up
 ```
 
 ### 🧪 Testing
