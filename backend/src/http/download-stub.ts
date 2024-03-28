@@ -7,13 +7,13 @@ import { join } from 'path';
 export class DownloadStubController {
   @Get()
   async handle(@Res({ passthrough: true }) response: Response) {
-    const path = join(process.cwd(), '../backend/src/assets/stub.csv');
+    const path = join(process.cwd(), '../backend/src/assets/stub.xlsx');
 
     const file = createReadStream(path);
 
     response.set({
       'Content-Type': 'application/json',
-      'Content-Disposition': 'attachment; filename="stub.csv"',
+      'Content-Disposition': 'attachment; filename="stub.xlsx"',
     });
 
     return new StreamableFile(file);

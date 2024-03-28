@@ -13,6 +13,7 @@ import * as csv from 'csv-parser';
 import { z } from 'zod';
 import { GenerateMetricsUseCase } from 'src/use-cases/generate-metrics';
 import { normalizeDate } from 'src/utils/normalize-date';
+import * as XLSX from 'xlsx';
 
 const spreadsheetValidationSchema = z.object({
   'quantidade cobranças': z.coerce.number(),
@@ -39,7 +40,7 @@ export class FetchMetricsController {
       new ParseFilePipe({
         validators: [
           new FileTypeValidator({
-            fileType: '.(csv|sheet|spreadsheet)',
+            fileType: '.(csv|sheet)',
           }),
         ],
         errorHttpStatusCode: 422,
@@ -47,7 +48,15 @@ export class FetchMetricsController {
     )
     file: Express.Multer.File,
   ) {
-    const stream = Readable.from(file.buffer);
+    let stream: Readable;
+
+    if (file.mimetype === 'text/csv') {
+      stream = Readable.from(file.buffer);
+    } else {
+      const xlsx = XLSX.read(file.buffer);
+      const csv = XLSX.utils.sheet_to_csv(xlsx.Sheets[xlsx.SheetNames[0]]);
+      stream = Readable.from(csv);
+    }
 
     const spreadsheet: SpreadsheetSchemaType[] = [];
 
