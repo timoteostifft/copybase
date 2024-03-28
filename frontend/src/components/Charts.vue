@@ -31,7 +31,7 @@ watch(
           {
             label: "Porcentagem",
             data: filtered.map((e) => e.churn),
-            backgroundColor: "#5f13b6",
+            backgroundColor: "#4c1191",
             borderColor: "#FFF",
             borderWidth: 2,
           },
@@ -48,7 +48,7 @@ watch(
             label: "Valor",
 
             data: filtered.map((e) => e.mrr),
-            backgroundColor: "#5f13b6",
+            backgroundColor: "#4c1191",
             borderColor: "#FFF",
             borderWidth: 2,
           },
@@ -84,7 +84,7 @@ watch(
         </div>
       </div>
       <div v-else>
-        <img src="../assets/file-unknown-svgrepo-com.svg" alt="Copybase" />
+        <img src="../assets/empty.svg" alt="Copybase" />
         <p>
           Parece que nenhuma planilha foi carregada. Envie seu modelo para que
           possamos gerar as métricas.
@@ -98,9 +98,14 @@ watch(
 #container {
   margin-top: 40px;
   #content {
-    max-width: 1280px;
     padding: 0px 20px;
     margin: 0 auto;
+
+    img {
+      margin-top: 20px;
+
+      opacity: 0.2;
+    }
 
     h2 {
       color: var(--purple-900);
@@ -108,13 +113,8 @@ watch(
     }
 
     h4 {
-      margin-top: 20px;
       color: var(--purple-900);
       font-weight: 700;
-    }
-
-    h4:nth-of-type(2) {
-      margin-top: 20px;
     }
     p {
       margin-top: 20px;
@@ -128,13 +128,61 @@ watch(
       > div {
         height: 320px;
       }
-
-      img {
-        margin-top: 20px;
-        width: 100px;
-        opacity: 0.2;
-      }
     }
+  }
+}
+
+@media (min-width: 1141px) {
+  #content {
+    h2 {
+      font-size: 2rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    h4:not(:first-of-type) {
+      margin-top: 80px;
+    }
+
+    img {
+      width: 140px;
+      opacity: 0.2;
+    }
+
+    p {
+      font-size: 1.25rem;
+      width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 1140px) {
+  img {
+    width: 100px;
+  }
+
+  h4 {
+    margin-top: 20px;
+  }
+
+  h4:nth-of-type(2) {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 767px) or (min-width: 1140px) {
+  #content {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1140px) {
+  #content {
+    max-width: 800px;
   }
 }
 </style>
