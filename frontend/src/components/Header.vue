@@ -20,13 +20,35 @@
   );
 
   #content {
-    max-width: 1280px;
-    padding: 10px 20px;
     margin: 0 auto;
+    padding: 10px 20px;
   }
+}
 
+@media (min-width: 768px) {
+  #content {
+    a > img {
+      width: 200px;
+      padding: 10px 20px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
   a > img {
     width: 130px;
+  }
+}
+
+@media (max-width: 767px) or (min-width: 1140px) {
+  #content {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1140px) {
+  #content {
+    max-width: 800px;
   }
 }
 </style>
