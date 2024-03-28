@@ -29,7 +29,7 @@
   #content {
     a > img {
       width: 200px;
-      padding: 10px 20px;
+      padding: 4px 0px;
     }
   }
 }
