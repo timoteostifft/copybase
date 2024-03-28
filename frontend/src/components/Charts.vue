@@ -30,7 +30,7 @@ watch(
         }),
         datasets: [
           {
-            label: "Taxa de rotatividade",
+            label: "Porcentagem",
             data: filtered.map((item) => item.percentage),
             backgroundColor: "#5f13b6",
             borderColor: "#41167f",
@@ -47,6 +47,7 @@ watch(
   <div id="container">
     <div id="content">
       <h2>Visualizar métricas</h2>
+      <h4>Taxa de rotatividade</h4>
       <div v-if="churn.datasets.length">
         <Bar
           :data="churn"
@@ -75,8 +76,14 @@ watch(
       font-weight: 700;
     }
 
-    > div {
+    h4 {
       margin-top: 20px;
+      color: var(--purple-900);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    > div {
       height: 320px;
       overflow-y: scroll;
     }
