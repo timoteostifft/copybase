@@ -35,11 +35,13 @@ describe('generate metrics', () => {
       _,
       {
         ..._,
+        interval: 365,
         canceled_at: null,
         status: 'ACTIVE' as 'ACTIVE' | 'CANCELED',
       },
       {
         ..._,
+        interval: 365,
         canceled_at: null,
         status: 'ACTIVE' as 'ACTIVE' | 'CANCELED',
       },
@@ -56,6 +58,9 @@ describe('generate metrics', () => {
       data,
     });
 
-    expect(result.churn[0].percentage).toBe(40);
+    expect(result.metrics[0].churn).toBe(0);
+    expect(result.metrics[0].mrr).toBe(760);
+    expect(result.metrics[1].churn).toBe(40);
+    expect(result.metrics[1].mrr).toBe(280);
   });
 });

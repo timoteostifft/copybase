@@ -21,7 +21,7 @@ export class GenerateMetricsUseCase {
     });
 
     return {
-      churn: metrics.churn,
+      metrics: metrics.generate,
     };
   }
 }

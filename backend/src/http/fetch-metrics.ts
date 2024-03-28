@@ -80,10 +80,10 @@ export class FetchMetricsController {
       subscriber_id: e['ID assinante'],
     }));
 
-    const { churn } = await this.generateMetricsUseCase.execute({ data });
+    const { metrics } = await this.generateMetricsUseCase.execute({ data });
 
     return {
-      churn,
+      metrics,
     };
   }
 }

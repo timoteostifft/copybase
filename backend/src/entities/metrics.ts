@@ -21,15 +21,55 @@ export class Metrics extends Entity<MetricsProps> {
     return this.props.data;
   }
 
-  get churn() {
+  get generate() {
+    const periods = this.periods();
+
+    const metrics: {
+      month: Date;
+      churn: number;
+      mrr: number;
+    }[] = [];
+
+    for (let i = 0; i < periods.length; i++) {
+      let j = 0;
+      let subscriptions = 0;
+      let revenue = 0;
+
+      while (j <= i) {
+        subscriptions +=
+          periods[j].subscriptions.gain - periods[j].subscriptions.loss;
+        revenue += periods[j].revenue.gain - periods[j].revenue.loss;
+        j++;
+      }
+
+      metrics.push({
+        month: periods[i].start,
+        churn:
+          (periods[i].subscriptions.loss /
+            (subscriptions + periods[i].subscriptions.loss)) *
+          100,
+        mrr: revenue,
+      });
+    }
+
+    return metrics;
+  }
+
+  private periods() {
+    const data = this.props.data;
+
     const periods: {
-      gain: number;
-      loss: number;
+      subscriptions: {
+        gain: number;
+        loss: number;
+      };
+      revenue: {
+        gain: number;
+        loss: number;
+      };
       start: Date;
       end: Date;
     }[] = [];
-
-    const data = this.props.data;
 
     for (let i = 0; i < data.length; i++) {
       const isTrial = !data[i].charges;
@@ -44,23 +84,35 @@ export class Metrics extends Entity<MetricsProps> {
           data[i].initiated_at <= period.end,
       );
 
+      const price =
+        data[i].interval / 365 === 1 ? data[i].price / 12 : data[i].price;
+
       if (startPeriod < 0) {
         const start = new Date(data[i].initiated_at.getTime());
         start.setDate(1);
         start.setHours(0, 0, 0, 0);
         start.setHours(start.getHours() - 3);
+
         const end = new Date(data[i].initiated_at.getTime());
         end.setMonth(end.getMonth() + 1, 0);
         end.setHours(23, 59, 59, 999);
         end.setHours(end.getHours() - 3);
+
         periods.push({
-          gain: 1,
-          loss: 0,
+          subscriptions: {
+            gain: 1,
+            loss: 0,
+          },
+          revenue: {
+            gain: price,
+            loss: 0,
+          },
           start,
           end,
         });
       } else {
-        periods[startPeriod].gain++;
+        periods[startPeriod].subscriptions.gain++;
+        periods[startPeriod].revenue.gain += price;
       }
 
       if (data[i].canceled_at) {
@@ -82,44 +134,25 @@ export class Metrics extends Entity<MetricsProps> {
           end.setHours(end.getHours() - 3);
 
           periods.push({
-            gain: 0,
-            loss: 1,
+            subscriptions: {
+              gain: 0,
+              loss: 1,
+            },
+            revenue: {
+              gain: 0,
+              loss: price,
+            },
             start,
             end,
           });
         } else {
-          periods[endPeriod].loss++;
+          periods[endPeriod].subscriptions.loss++;
+          periods[endPeriod].revenue.loss += price;
         }
       }
     }
 
-    periods.sort((a, b) => a.start.getTime() - b.start.getTime());
-
-    const churns: {
-      month: Date;
-      percentage: number;
-    }[] = [];
-
-    for (let i = 0; i < periods.length; i++) {
-      let j = i - 1;
-      let active = 0;
-
-      while (j >= 0) {
-        active += periods[j].gain - periods[j].loss;
-        j--;
-      }
-
-      if (!active) {
-        continue;
-      }
-
-      churns.push({
-        month: periods[i].start,
-        percentage: (periods[i].loss / active) * 100,
-      });
-    }
-
-    return churns;
+    return periods.sort((a, b) => a.start.getTime() - b.start.getTime());
   }
 
   static create(props: MetricsProps, id?: UUID) {
