@@ -26,26 +26,64 @@
   #content {
     display: flex;
     flex-direction: column;
-    max-width: 1280px;
     padding: 40px 20px 40px 20px;
     margin: 0 auto;
 
-    a > img {
-      width: 160px;
-    }
-
     > p {
       margin-top: 40px;
-      font-size: 0.8rem;
       color: var(--background);
     }
 
     > span {
       margin-top: 20px;
-      font-size: 0.8rem;
       color: var(--background);
       text-align: right;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  #content {
+    max-width: 1140px;
+
+    a > img {
+      width: 200px;
+    }
+
+    > p {
+      font-size: 1rem;
+    }
+
+    > span {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #content {
+    a > img {
+      width: 160px;
+    }
+    > p {
+      font-size: 0.8rem;
+    }
+
+    > span {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 767px) or (min-width: 1140px) {
+  #content {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1140px) {
+  #content {
+    max-width: 800px;
   }
 }
 </style>
