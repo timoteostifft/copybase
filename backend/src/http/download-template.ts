@@ -7,13 +7,12 @@ import { join } from 'path';
 export class DownloadTemplateController {
   @Get()
   async handle(@Res({ passthrough: true }) response: Response) {
-
     const path = join(process.cwd(), '../backend/src/assets/template.csv');
 
     const file = createReadStream(path);
 
     response.set({
-      'Content-Type': 'application/json',
+      'Content-Type': 'text/csv',
       'Content-Disposition': 'attachment; filename="template.csv"',
     });
 

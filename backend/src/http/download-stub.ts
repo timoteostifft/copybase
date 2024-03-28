@@ -12,7 +12,8 @@ export class DownloadStubController {
     const file = createReadStream(path);
 
     response.set({
-      'Content-Type': 'application/json',
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       'Content-Disposition': 'attachment; filename="stub.xlsx"',
     });
 
