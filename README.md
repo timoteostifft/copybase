@@ -26,6 +26,8 @@
   docker-compose up
 ```
 
+4. You can access the app locally following this [link](http://localhost:5173/).
+
 ### 🧪 Testing
 
 You can execute the API unit tests by accessing /backend. Do not forget to install required dependencies.
