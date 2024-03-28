@@ -28,7 +28,7 @@
 
 ### 🧪 Testing
 
-You can execute the API unit tests by accessing /backend.
+You can execute the API unit tests by accessing /backend. Do not forget to install required dependencies.
 
 ```bash
  cd backend && npm run test
