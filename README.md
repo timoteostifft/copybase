@@ -17,7 +17,7 @@
 
 2. Create your own .env copying env.example.
 ```bash
-  cp ./frontend/.enx.example frontend/.env
+  cp ./frontend/.env.example frontend/.env
 ```
 
 3. Run using docker-compose:
