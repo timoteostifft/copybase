@@ -80,12 +80,9 @@ function select() {
   );
 
   #content {
-    max-width: 1280px;
-    padding: 0 20px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 20px;
     color: var(--background);
 
     #dropzone {
@@ -93,7 +90,6 @@ function select() {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
       border-radius: 6px;
       text-align: center;
       font-weight: 400;
@@ -103,10 +99,6 @@ function select() {
       span {
         line-height: 1rem;
         margin-top: 10px;
-      }
-
-      img {
-        width: 30px;
       }
 
       label {
@@ -143,6 +135,50 @@ function select() {
     .active {
       filter: brightness(0.8);
     }
+  }
+}
+
+@media (min-width: 1140px) {
+  #content {
+    padding: 60px 20px;
+    font-size: 1.25rem;
+    > h2 {
+      font-size: 2rem;
+    }
+
+    #dropzone {
+      padding: 40px;
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1140px) {
+  #content {
+    padding: 20px;
+
+    #dropzone {
+      padding: 20px;
+
+      img {
+        width: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) or (min-width: 1140px) {
+  #content {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1140px) {
+  #content {
+    max-width: 800px;
   }
 }
 </style>
