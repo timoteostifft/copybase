@@ -8,8 +8,8 @@ import { ref } from "vue";
 
 const metricsData = ref<TypeOfMetrics | null>(null);
 
-function generateGraphics(data: TypeOfMetrics) {
-  metricsData.value = data;
+function generateGraphics(data: { metrics: TypeOfMetrics }) {
+  metricsData.value = data.metrics;
 }
 </script>
 

@@ -1,6 +1,5 @@
 export type Metrics = {
-  churn: {
-    month: Date;
-    percentage: number;
-  }[];
-};
+  month: Date;
+  churn: number;
+  mrr: number;
+}[];

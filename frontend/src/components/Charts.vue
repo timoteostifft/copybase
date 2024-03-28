@@ -14,26 +14,42 @@ const emtpy = {
 } as ChartData<"bar", (number | [number, number] | null)[], unknown>;
 
 let churn = emtpy;
+let mrr = emtpy;
 
 watch(
   () => props.data,
   () => {
     if (props.data) {
-      const filtered = props.data.churn.filter((item) => item.percentage > 0);
+      const filtered = props.data.filter((e) => e.churn);
 
       churn = {
-        labels: filtered.map((item) => {
-          if (item.percentage > 0) {
-            const index = item.month.toString().indexOf("T");
-            return item.month.toString().substring(0, index);
-          }
+        labels: filtered.map((e) => {
+          const index = e.month.toString().indexOf("T");
+          return e.month.toString().substring(0, index);
         }),
         datasets: [
           {
             label: "Porcentagem",
-            data: filtered.map((item) => item.percentage),
+            data: filtered.map((e) => e.churn),
             backgroundColor: "#5f13b6",
-            borderColor: "#41167f",
+            borderColor: "#FFF",
+            borderWidth: 2,
+          },
+        ],
+      };
+
+      mrr = {
+        labels: filtered.map((e) => {
+          const index = e.month.toString().indexOf("T");
+          return e.month.toString().substring(0, index);
+        }),
+        datasets: [
+          {
+            label: "Valor",
+
+            data: filtered.map((e) => e.mrr),
+            backgroundColor: "#5f13b6",
+            borderColor: "#FFF",
             borderWidth: 2,
           },
         ],
@@ -47,17 +63,32 @@ watch(
   <div id="container">
     <div id="content">
       <h2>Visualizar métricas</h2>
-      <h4>Taxa de rotatividade</h4>
       <div v-if="churn.datasets.length">
-        <Bar
-          :data="churn"
-          :options="{
-            maintainAspectRatio: false,
-          }"
-        />
+        <h4>Taxa de rotatividade</h4>
+        <div>
+          <Bar
+            :data="churn"
+            :options="{
+              maintainAspectRatio: false,
+            }"
+          />
+        </div>
+        <h4>Receita recorrente</h4>
+        <div>
+          <Bar
+            :data="mrr"
+            :options="{
+              maintainAspectRatio: false,
+            }"
+          />
+        </div>
       </div>
       <div v-else>
-        <p>VAZIO</p>
+        <img src="../assets/file-unknown-svgrepo-com.svg" alt="Copybase" />
+        <p>
+          Parece que nenhuma planilha foi carregada. Envie seu modelo para que
+          possamos gerar as métricas.
+        </p>
       </div>
     </div>
   </div>
@@ -80,12 +111,29 @@ watch(
       margin-top: 20px;
       color: var(--purple-900);
       font-weight: 700;
-      text-align: center;
+    }
+
+    h4:nth-of-type(2) {
+      margin-top: 20px;
+    }
+    p {
+      margin-top: 20px;
+      color: var(--text);
     }
 
     > div {
-      height: 320px;
-      overflow-y: scroll;
+      margin-top: 20px;
+      text-align: center;
+
+      > div {
+        height: 320px;
+      }
+
+      img {
+        margin-top: 20px;
+        width: 100px;
+        opacity: 0.2;
+      }
     }
   }
 }
