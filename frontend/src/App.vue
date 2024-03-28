@@ -3,6 +3,7 @@ import Header from "./components/Header.vue";
 import Template from "./components/Template.vue";
 import Upload from "./components/Upload.vue";
 import Charts from "./components/Charts.vue";
+import Footer from "./components/Footer.vue";
 import { Metrics as TypeOfMetrics } from "./types/metric.ts";
 import { ref } from "vue";
 
@@ -18,6 +19,7 @@ function generateGraphics(data: { metrics: TypeOfMetrics }) {
   <Template />
   <Upload @upload="generateGraphics" />
   <Charts :data="metricsData" />
+  <Footer />
 </template>
 
 <style scoped></style>
