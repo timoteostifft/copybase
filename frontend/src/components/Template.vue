@@ -19,7 +19,7 @@ const api = import.meta.env.VITE_API;
 
 <style scoped lang="scss">
 #container {
-  margin-top: 40px;
+  margin-top: 90px;
   #content {
     max-width: 1280px;
     padding: 0 20px;

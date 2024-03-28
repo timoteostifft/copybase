@@ -10,6 +10,9 @@
 
 <style scoped lang="scss">
 #container {
+  position: fixed;
+  width: 100%;
+  top: 0;
   background-image: linear-gradient(
     82deg,
     var(--purple-500),
