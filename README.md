@@ -30,3 +30,7 @@ You can execute the API unit tests by accessing /backend.
 ```bash
  cd backend && npm run test
 ```
+
+### 🌐 Deploy
+
+A running instance can be accessed [here](https://copybase.vercel.app/).
